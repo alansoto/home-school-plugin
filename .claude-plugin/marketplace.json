@@ -1,0 +1,11 @@
+{
+  "name": "home-school",
+  "owner": { "name": "Alan" },
+  "plugins": [
+    {
+      "name": "home-school",
+      "source": "./home-school",
+      "description": "The family's home-school records: the Home School connector and the skill for working with it."
+    }
+  ]
+}
