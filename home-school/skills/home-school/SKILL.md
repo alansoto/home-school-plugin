@@ -1,6 +1,6 @@
 ---
 name: home-school
-description: Use for anything about the child's learning, his week, the Learning Plan, Activities, Evidence or chores, or the Home School Knowledge Base. Recording is when Ash tells you what he did.
+description: Use for anything about the child's learning, his week, the Learning Plan, Activities, Evidence or chores, or the Home School Knowledge Base. Recording is when a parent (Ash or Alan) tells you what their son did.
 ---
 
 # Home School
@@ -11,9 +11,15 @@ procedures arrive with their tickets.
 
 ## Recording
 
-Ash tells you in plain words what happened ("he did the museum today, he loved the fossils"). Put it in the
-records yourself, without asking her which part goes where. Recording should take her seconds: at most **one
-question** per recording, always skippable, with the default you'll use if she skips it.
+Ash, one of his parents, tells you in plain words what he did ("he did the museum today, he loved the fossils"). Put it in
+the records yourself, without asking her which part goes where. Recording should take her seconds. Every question
+is skippable, with the default you'll use if she skips it:
+
+- the recording itself (which option, which day, his skills, what he showed): at most **one question**
+- filing a note the Index can't place: one question
+- a plan change: one question
+
+Ask them together in one reply. A plain recording asks one question or none.
 
 1. **Find the day and place.** Read the matching Event from her Calendar (today's, or the day she names) for
    when and where it happened. A day like "sunday" becomes its date. When it's unclear ("this week"), your one
@@ -28,9 +34,12 @@ question** per recording, always skippable, with the default you'll use if she s
    - None fits: record it as spontaneous, with a short caption in plain words.
 4. **Keep her words.** What he did or said on this one occasion, and what it shows, is the `observation`:
    lightly tidied, in her words. "He loved the fossils" is enjoyment, not evidence of a skill; when that's all
-   she gave, your one question can be what he showed he understood.
+   she gave, your one question can be what he showed he understood, if it isn't needed for anything else. When
+   her words only name what he did ("he did some fractions"), the option says it all: leave `observation` out.
 5. **Spontaneous work.** Propose the skills you think it exercised (from `read_plan`), and let her choose:
    confirm now (`confirm_skills`), or leave it for the Weekly Review. It counts toward cadence once confirmed.
+   This is the one place the week's cadence belongs in a recording: when her choice here would fill a Jar
+   ("confirming it would fill this week's Science Jar"). Otherwise the week waits until she asks.
 6. **Split the rest of her message.** One message often holds several kinds of thing:
    - one occasion → a Parent Observation in the records (steps 2–4)
    - a reflection across weeks ("his reading has taken off since…") → a Progress Note in the Knowledge Base,
@@ -42,7 +51,7 @@ question** per recording, always skippable, with the default you'll use if she s
    about one change ("Reading log is still one of his options. Should I take it out?"). Apply it on her yes
    (`retire_option`, `add_option`); otherwise the plan stays as it is.
 8. **End with the receipt.** A short list of what was saved where (records, Home School doc, calendar), the
-   upload link as one quiet line, then "Anything I got wrong?".
+   upload link as one quiet line, any questions, then the closing line, word for word: "Anything I got wrong?".
 
 ### Knowledge Base curation
 
