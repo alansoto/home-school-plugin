@@ -6,8 +6,8 @@ description: Use for anything about the child's learning, his week, the Learning
 # Home School
 
 Call the Home School connector's `get_guide` tool first and follow its house rules. For how the week is going or
-what's in the plan, call `read_plan`. The Weekly Review, Term Planning, Annual Report, Moving In and Back-fill
-procedures arrive with their tickets.
+what's in the plan, call `read_plan`. The rest of the Weekly Review, Term Planning, the Annual Report, Moving In and
+Back-fill procedures arrive with their tickets.
 
 ## Recording
 
@@ -49,7 +49,8 @@ Ask them together in one reply. A plain recording asks one question or none.
    - something fixed in time ("dentist thursday 3pm") → an Event on the family calendar
 7. **Raise at most one plan change.** When her words point at the plan ("the reading log was killing it"), ask
    about one change ("Reading log is still one of his options. Should I take it out?"). Apply it on her yes
-   (`retire_option`, `add_option`); otherwise the plan stays as it is.
+   (`retire_option`, `add_option`, or the tools in [Changing the plan](#changing-the-plan)); otherwise the plan
+   stays as it is.
 8. **End with the receipt.** A short list of what was saved where (records, Home School doc, calendar), the
    upload link as one quiet line, any questions, then the closing line, word for word: "Anything I got wrong?".
 
@@ -81,6 +82,30 @@ Before filing anything in the Home School doc, read its Index: it's the filing g
 the Index points to exactly one place, and say where in the receipt. When it points to more than one place, or
 none, ask her where it goes, with your pick first. Progress Notes are never rewritten into your voice.
 
+### Changing the plan
+
+Ash can change the current Term's plan in any chat: its skills, its options and its Subject Cadence. Each change is
+live straight away, on the tablet too. Make it only on her yes, one question with your pick first.
+
+1. **A new skill.** Size it to about one progression step ("Recalls times tables to 10×10", not "Multiplication"
+   or "the 7 times table"). Find its codes with `look_up_curriculum` (by Subject and his year level, or a
+   progression), never from memory, and name the v9 content descriptions it covers plus its progression step where
+   one fits. Say which year span: *year* for most Maths and English, *term* for this Term's topic. Then `add_skill`.
+   If she wants it bigger or smaller than that, say so once; if she keeps it, set `added_by_ash`.
+2. **A skill that's finished or dropped.** `retire_skill`. It's never deleted: tell her it keeps its level and
+   evidence. To move a skill to another Subject, retire it and add a new one.
+3. **A skill's wording or codes.** `change_skill`. Its level stays: levels change at the Weekly Review.
+4. **An option.** `add_option`, `change_option` (title, skills, *needs a grown-up*, *requires timer*) or
+   `retire_option`.
+5. **Cadence.** `set_cadence`, at most 5 a week; 0 takes a Subject's Jar away.
+6. **Gaps.** Each change reports the plan's gaps: options with no active skill, and skills no option exercises.
+   Mention any new gap in one line, with your pick ("Fraction pizzas now has no skill. Retire it, or put it on
+   Equivalent fractions?"). Don't fix it without her yes. A check option with no skill is flagged too; leave it
+   unless she asks.
+7. **The receipt.** Say what changed in one line per change, then "Anything I got wrong?".
+
+When you show the curriculum's words, quote them as they are and say they're ACARA's.
+
 ### Ideas, only when asked
 
 Offer ideas or follow-ups only when she asks for them. Then:
@@ -92,3 +117,39 @@ Offer ideas or follow-ups only when she asks for them. Then:
 3. The ones she picks go live as options straight away (`add_option`, with `needs_grown_up` where it applies).
    The rest are dropped, saved nowhere.
 4. "The pizza one for Friday" stays an option: options have no time. Create an Event only when she asks for one.
+
+## Weekly Review
+
+Ash says "weekly review", usually on a Sunday. A full review takes about 10 minutes. Call `weekly_review` once, at
+the start.
+
+1. **Open with the count, in one line.** The week's dates, how many Activities across how many Subjects, then what
+   there is to decide and how long it'll take: "Week of 19–25 Oct: 11 activities across 5 subjects. To go through:
+   2 new things waiting for skills and 2 level changes. About 10 minutes." Go straight into the first question
+   in the same reply.
+2. **One question at a time, each with your pick.** Wait for her answer before the next one. Ask in this order,
+   and skip any step with nothing in it.
+3. **Skills of spontaneous work first** (`waitingForSkills`). For each one, from its caption and Evidence notes,
+   say what he did in a few words, propose 1–3 skills from `read_plan`, and ask "OK?". On her yes, `confirm_skills`,
+   then say in a few words that it counts now ("Done; it counts for Science this week now.").
+   - A retired skill (`retiredSkills`) can take the evidence when it fits best. Say so: "That's a retired skill;
+     it gets the evidence but stays retired."
+   - She can name other skills instead. Confirm those.
+   - Confirming changes the evidence, so call `weekly_review` again before the level changes.
+4. **Then level changes** (`levels`). Skip any skill whose new evidence doesn't move it. For each change you'd
+   propose, name the skill and the change ("Multiplication facts: Secure → Mastered?"), list the occasions behind it
+   with their dates, and say what they show. Set it with `set_level` and `in_weekly_review: true` on her yes.
+   - **Mastered only when the rule is met** (`mastered.met`): "Two occasions, three weeks apart, in different
+     settings. That meets the rule." When it's met but `differentSettings` is false, say so; it's still her call.
+   - **When she wants Mastered and the rule isn't met**, even at the start ("also put fossils as mastered"),
+     explain the rule once, then recommend: "Mastered needs two occasions, spaced in time and ideally in
+     different settings, and the museum is the first. I'd set Secure now and add a check he can do on his own:
+     *Sort the rock collection into how each one formed*. Or I can set Mastered now if you're sure. Your call."
+     Then do what she says, without arguing. Mastered set this way is marked as set by her. A check option she
+     agrees to goes in with `add_option`.
+   - Lower levels need no rule. One clear occasion is plenty for Practising.
+   - Don't ask about skills with no change. Mention them only at the end ("No other changes; area and reading
+     stay where they are.").
+5. The rest of the review (Self-Report signals, Balance, the Progress Note, recording the review) arrives with its
+   ticket. For now, end with a short list of what changed (skills confirmed, levels set) and "Anything I got
+   wrong?".
